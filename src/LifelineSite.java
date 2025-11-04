@@ -4,23 +4,23 @@ public class LifelineSite extends Site{
         super(units, rate);
     }
 
-    //extracted method
-    private double getBaseAmount(){
+    /**
+     * implements lifeline calculation units * rate
+     * @return units * rate
+     */
+    @Override
+    public double getBaseAmount(){
         return this.units * this.rate;
     }
 
-    //extracted method
-    private double getTaxAmount(double base){
-        return base * Site.TAX_RATE;
-    }
-
-    //common template for pulling up
-    public double getBillableAmount(){
-        double base = getBaseAmount();
-
-        double tax = getTaxAmount(base);
-
-        return base + tax;
+    /**
+     * Tax Calculations
+     * @param baseAmount base amount
+     * @return total tax amount
+     */
+    @Override
+    public double getTaxAmount(double baseAmount) {
+        return baseAmount * Site.TAX_RATE;
     }
 
 }

@@ -4,23 +4,23 @@ public class ResidentialSite extends Site{
         super(units, rate);
     }
 
-    //extracted method
-    private double getBaseAmount(){
+    /**
+     * implements residential calculation units * rate
+     * @return units * rate * 0.5
+     */
+    @Override
+    public double getBaseAmount(){
         return this.units * this.rate * 0.5;
     }
 
-    //extracted method
-    private double getTaxAmount(double base){
-        return base * Site.TAX_RATE;
-    }
-
-    //common template for pulling up
-    public double getBillableAmount(){
-        double base = getBaseAmount();
-
-        double tax = getTaxAmount(base);
-
-        return base + tax;
+    /**
+     * Tax Calculations
+     * @param baseAmount base amount
+     * @return total tax amount
+     */
+    @Override
+    public double getTaxAmount(double baseAmount) {
+        return baseAmount * Site.TAX_RATE;
     }
 
 }
